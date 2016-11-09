@@ -107,8 +107,16 @@
     _tabView = [[UITableView alloc]init];
     _tabView.delegate = self;
     _tabView.dataSource = self;
-    _tabView = [[UITableView alloc]initWithFrame:CGRectZero];
+    _tabView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_tabView];
+    _tabView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    [self.view addSubview:_tabView];
+    [_tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_gridView.mas_bottom).offset(0);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-10);
+        
+    }];
     
     
     _mask = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -136,7 +144,6 @@
     width  = ImageGridWidth;
     heigh = [DFPlainGridImageView getHeight:_images maxWidth:width];
     _gridView.frame = CGRectMake(x, y, width, heigh);
-    _tabView.frame = CGRectMake(0, _gridView.frame.origin.y + _gridView.frame.size.height, [UIScreen mainScreen].bounds.size.width, 100);
     [_gridView updateWithImages:_images];
 }
 
