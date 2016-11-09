@@ -70,11 +70,19 @@
 {
     [super viewDidLoad];
     [self initView];
-    
 }
 
 -(void) initView
 {
+    
+    //导航栏颜色
+    UIColor * color = [UIColor whiteColor];
+    NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+    self.navigationController.navigationBar.titleTextAttributes = dict;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:40/256.0 green:40/256.0 blue:40/256.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -169,7 +177,7 @@
     
     [alertController addAction:okAction];
     [alertController addAction:cancelAction];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 -(void) send
@@ -191,6 +199,15 @@
     [_contentView resignFirstResponder];
 }
 
+-(IBAction)sliderChanged:(UISlider*)sender {
+    
+    NSLog(@"sender.value = %f",sender.value);
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:2];
+    UITableViewCell *cell = [_tabView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"图片压缩率%d%%",(int)sender.value];
+}
+
+
 
 
 #pragma mark - UITextViewDelegate
@@ -205,15 +222,15 @@
         _placeholder.hidden = NO;
         
     }
-//    if ([text isEqualToString:@"\n"]){
-//        _mask.hidden = YES;
-//        [_contentView resignFirstResponder];
-//        if (range.location == 0)
-//        {
-//            _placeholder.hidden = NO;
-//        }
-//        return NO;
-//    }
+    //    if ([text isEqualToString:@"\n"]){
+    //        _mask.hidden = YES;
+    //        [_contentView resignFirstResponder];
+    //        if (range.location == 0)
+    //        {
+    //            _placeholder.hidden = NO;
+    //        }
+    //        return NO;
+    //    }
     
     return YES;
 }
@@ -392,9 +409,16 @@
     } else if (indexPath.section == 2) {
         cell.imageView.image = [UIImage imageNamed:@"suo_lve_tu"];
         cell.textLabel.text = @"图片压缩率";
-        UISlider *sld = [[UISlider alloc]init];
-        [cell.contentView addSubview:sld];
-        [sld mas_makeConstraints:^(MASConstraintMaker *make) {
+        UISlider *mySlider = [[UISlider alloc] init];
+        [self.view addSubview:mySlider];
+        mySlider.minimumValue = 0.0;
+        mySlider.maximumValue = 50.0;
+        mySlider.value = 0.0;
+        mySlider.continuous = YES;
+        [mySlider addTarget:self action:@selector(sliderChanged:)
+           forControlEvents:UIControlEventValueChanged];
+        [cell.contentView addSubview:mySlider];
+        [mySlider mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(cell.textLabel.mas_right).offset(5);
             make.right.mas_equalTo(-5);
             make.top.mas_equalTo(10);
