@@ -21,7 +21,7 @@
 
 #define ImageGridWidth [UIScreen mainScreen].bounds.size.width*0.7
 
-@interface DFImagesSendViewController()<DFPlainGridImageViewDelegate,TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate>
+@interface DFImagesSendViewController()<DFPlainGridImageViewDelegate,TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *images;
 
@@ -32,6 +32,8 @@
 @property (nonatomic, strong) UILabel *placeholder;
 
 @property (nonatomic, strong) DFPlainGridImageView *gridView;
+
+@property (nonatomic, strong) UITableView *tabView;
 
 @property (nonatomic, strong) UIImagePickerController *pickerController;
 
@@ -101,6 +103,18 @@
     _gridView.delegate = self;
     [self.view addSubview:_gridView];
     
+    _tabView = [[UITableView alloc]init];
+    _tabView.delegate = self;
+    _tabView.dataSource = self;
+    _tabView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    [self.view addSubview:_tabView];
+    [_tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_gridView.mas_bottom).offset(0);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-10);
+        
+    }];
+    
     
     _mask = [[UIView alloc] initWithFrame:self.view.bounds];
     _mask.backgroundColor = [UIColor clearColor];
@@ -142,6 +156,16 @@
 
 -(void) cancel
 {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定退出此次编辑？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancelAction];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -330,6 +354,71 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [_pickerController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma  mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 4;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0 || section == 2) {
+        return 1;
+    }
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 15;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    if (indexPath.section == 0) {
+        cell.imageView.image = [UIImage imageNamed:@"location"];
+        cell.textLabel.text = @"所在位置";
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.imageView.image = [UIImage imageNamed:@"shui_ke_yi_kan"];
+            cell.textLabel.text = @"谁可以看";
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"ti_xing_shui_kan"];
+            cell.textLabel.text = @"提醒谁看";
+        }
+    } else if (indexPath.section == 2) {
+        cell.imageView.image = [UIImage imageNamed:@"suo_lve_tu"];
+        cell.textLabel.text = @"图片压缩率";
+        UISlider *sld = [[UISlider alloc]init];
+        [cell.contentView addSubview:sld];
+        [sld mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cell.textLabel.mas_right).offset(5);
+            make.right.mas_equalTo(-5);
+            make.top.mas_equalTo(10);
+            make.height.mas_equalTo(20);
+        }];
+    } else {
+        if (indexPath.row == 0) {
+            cell.imageView.image = [UIImage imageNamed:@"fen_zu"];
+            cell.textLabel.text = @"分组";
+        } else{
+            cell.imageView.image = [UIImage imageNamed:@"lei_xing"];
+            cell.textLabel.text = @"基层类型";
+        }
+    }
+    
+    cell.accessoryType = YES;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 3) {
+        if (indexPath.row == 0) {
+            NSLog(@"测试动态分组");
+        }
+    }
 }
 
 @end
