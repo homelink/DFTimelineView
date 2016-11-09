@@ -19,7 +19,7 @@
 
 @interface DFUserTimeLineViewController()<DFBaseUserLineCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray *items;
+
 
 @property (nonatomic, assign) NSUInteger currentDay;
 

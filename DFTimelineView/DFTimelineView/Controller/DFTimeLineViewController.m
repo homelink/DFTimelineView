@@ -25,7 +25,7 @@
 
 @interface DFTimeLineViewController ()<DFLineCellDelegate, CommentInputViewDelegate, TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, DFImagesSendViewControllerDelegate,DFVideoCaptureControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *items;
+
 
 @property (nonatomic, strong) NSMutableDictionary *itemDic;
 

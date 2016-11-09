@@ -15,6 +15,8 @@
 
 @interface DFTimeLineViewController : DFBaseTimeLineViewController
 
+@property (nonatomic, strong) NSMutableArray *items;
+
 //添加到末尾
 -(void) addItem:(DFBaseLineItem *) item;
 
