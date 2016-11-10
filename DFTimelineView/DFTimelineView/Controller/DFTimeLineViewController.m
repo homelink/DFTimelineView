@@ -20,12 +20,12 @@
 
 #import "TZImagePickerController.h"
 
-#import "DFImagesSendViewController.h"
+//#import "DFImagesSendViewController.h"
 #import "DFVideoCaptureController.h"
 
 #import "NewDynamicVc.h"
 
-@interface DFTimeLineViewController ()<DFLineCellDelegate, CommentInputViewDelegate, TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, DFImagesSendViewControllerDelegate,DFVideoCaptureControllerDelegate,NewDynamicVcDelegate>
+@interface DFTimeLineViewController ()<DFLineCellDelegate, CommentInputViewDelegate, TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,DFVideoCaptureControllerDelegate,NewDynamicVcDelegate>
 
 
 
@@ -148,7 +148,7 @@
 
 -(void) onLongPressCamera:(UIGestureRecognizer *) gesture
 {
-    DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:nil];
+    NewDynamicVc *controller = [[NewDynamicVc alloc] initWithImages:nil];
     controller.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:navController animated:YES completion:nil];
@@ -483,7 +483,7 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:photos];
+        NewDynamicVc *controller = [[NewDynamicVc alloc] initWithImages:photos];
         controller.delegate = self;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
         [self presentViewController:navController animated:YES completion:nil];
@@ -503,7 +503,7 @@
     
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     
-    DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:@[image]];
+    NewDynamicVc *controller = [[NewDynamicVc alloc] initWithImages:@[image]];
     controller.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:navController animated:YES completion:nil];
@@ -518,7 +518,7 @@
 
 
 
-#pragma mark - DFImagesSendViewControllerDelegate
+#pragma mark - NewDynamicVcDelegate
 
 -(void)onSendTextImage:(NSString *)text images:(NSArray *)images
 {
