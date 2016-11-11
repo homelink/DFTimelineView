@@ -20,12 +20,10 @@
 
 #import "TZImagePickerController.h"
 
-//#import "DFImagesSendViewController.h"
+#import "DFImagesSendViewController.h"
 #import "DFVideoCaptureController.h"
 
-#import "NewDynamicVc.h"
-
-@interface DFTimeLineViewController ()<DFLineCellDelegate, CommentInputViewDelegate, TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,DFVideoCaptureControllerDelegate,NewDynamicVcDelegate>
+@interface DFTimeLineViewController ()<DFLineCellDelegate, CommentInputViewDelegate, TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, DFImagesSendViewControllerDelegate,DFVideoCaptureControllerDelegate>
 
 
 
@@ -38,7 +36,6 @@
 
 
 @property (assign, nonatomic) long long currentItemId;
-
 
 
 @end
@@ -59,7 +56,7 @@
         
         MMSheetViewConfig *sheetConfig = [MMSheetViewConfig globalConfig];
         sheetConfig.defaultTextCancel = @"取消";
-
+        
         
         
         _items = [NSMutableArray array];
@@ -126,7 +123,7 @@
         _commentInputView.delegate = self;
         [self.view addSubview:_commentInputView];
     }
-        
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,7 +145,7 @@
 
 -(void) onLongPressCamera:(UIGestureRecognizer *) gesture
 {
-    NewDynamicVc *controller = [[NewDynamicVc alloc] initWithImages:nil];
+    DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:nil];
     controller.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:navController animated:YES completion:nil];
@@ -175,8 +172,8 @@
     };
     
     NSArray *items = @[MMItemMake(@"小视频", MMItemTypeNormal, block),
-      MMItemMake(@"拍照", MMItemTypeNormal, block),
-      MMItemMake(@"从相册选取", MMItemTypeNormal, block)];
+                       MMItemMake(@"拍照", MMItemTypeNormal, block),
+                       MMItemMake(@"从相册选取", MMItemTypeNormal, block)];
     
     MMSheetView *sheetView = [[MMSheetView alloc] initWithTitle:@"" items:items];
     
@@ -191,7 +188,7 @@
     [self presentViewController:controller animated:YES completion:^{
         
     }];
-
+    
 }
 
 
@@ -240,7 +237,7 @@
     }else{
         NSLog(@"重用Cell: %@", reuseIdentifier);
     }
-
+    
     cell.delegate = self;
     
     cell.separatorInset = UIEdgeInsetsZero;
@@ -483,7 +480,7 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        NewDynamicVc *controller = [[NewDynamicVc alloc] initWithImages:photos];
+        DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:photos];
         controller.delegate = self;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
         [self presentViewController:navController animated:YES completion:nil];
@@ -503,11 +500,11 @@
     
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     
-    NewDynamicVc *controller = [[NewDynamicVc alloc] initWithImages:@[image]];
+    DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:@[image]];
     controller.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:navController animated:YES completion:nil];
-
+    
     
 }
 
@@ -518,7 +515,7 @@
 
 
 
-#pragma mark - NewDynamicVcDelegate
+#pragma mark - DFImagesSendViewControllerDelegate
 
 -(void)onSendTextImage:(NSString *)text images:(NSArray *)images
 {
