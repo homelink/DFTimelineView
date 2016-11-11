@@ -55,6 +55,12 @@
 		11E157CF1BC8F6E500F2F99A /* CommentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E157CE1BC8F6E500F2F99A /* CommentInputView.m */; };
 		11F07F9E1BCF9BBE0084DAA3 /* DFBaseTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F07F9D1BCF9BBE0084DAA3 /* DFBaseTimeLineViewController.m */; };
 		40DB16E90B178BFB41AD7BFB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D78B98A426548E916FEF8BA /* libPods.a */; };
+		CE2732E01DD316AD005A443D /* fen_zu.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2732DF1DD316AD005A443D /* fen_zu.png */; };
+		CE2732E21DD316B5005A443D /* lei_xing.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2732E11DD316B5005A443D /* lei_xing.png */; };
+		CE2732E41DD316BB005A443D /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2732E31DD316BB005A443D /* location.png */; };
+		CE2732E61DD316C1005A443D /* shui_ke_yi_kan.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2732E51DD316C1005A443D /* shui_ke_yi_kan.png */; };
+		CE2732E81DD316CA005A443D /* suo_lve_tu.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2732E71DD316CA005A443D /* suo_lve_tu.png */; };
+		CE2732EA1DD316D6005A443D /* ti_xing_shui_kan.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2732E91DD316D6005A443D /* ti_xing_shui_kan.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +148,12 @@
 		4D78B98A426548E916FEF8BA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F49AA15AE3FE5215CAC7F60 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B4A7DD4710BBDDD344A4E1FE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CE2732DF1DD316AD005A443D /* fen_zu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fen_zu.png; sourceTree = "<group>"; };
+		CE2732E11DD316B5005A443D /* lei_xing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lei_xing.png; sourceTree = "<group>"; };
+		CE2732E31DD316BB005A443D /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		CE2732E51DD316C1005A443D /* shui_ke_yi_kan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shui_ke_yi_kan.png; sourceTree = "<group>"; };
+		CE2732E71DD316CA005A443D /* suo_lve_tu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suo_lve_tu.png; sourceTree = "<group>"; };
+		CE2732E91DD316D6005A443D /* ti_xing_shui_kan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ti_xing_shui_kan.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +349,12 @@
 		11D758E31BB8E6C300F554D7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CE2732E11DD316B5005A443D /* lei_xing.png */,
+				CE2732DF1DD316AD005A443D /* fen_zu.png */,
+				CE2732E31DD316BB005A443D /* location.png */,
+				CE2732E51DD316C1005A443D /* shui_ke_yi_kan.png */,
+				CE2732E71DD316CA005A443D /* suo_lve_tu.png */,
+				CE2732E91DD316D6005A443D /* ti_xing_shui_kan.png */,
 				1173E5241C71BF63004C9979 /* AlbumAddBtn@2x.png */,
 				1173E4F11C71813E004C9979 /* Camera@2x.png */,
 				1173E4F21C71813E004C9979 /* Camera@3x.png */,
@@ -484,20 +502,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2732E01DD316AD005A443D /* fen_zu.png in Resources */,
 				11D758EE1BB8E6C300F554D7 /* Like@2x.png in Resources */,
 				11D758EA1BB8E6C300F554D7 /* AlbumOperateMore@2x.png in Resources */,
 				11D7590B1BBACC2700F554D7 /* AlbumComment@2x.png in Resources */,
 				11D758311BB7D43B00F554D7 /* Images.xcassets in Resources */,
 				1173E4F41C71813E004C9979 /* Camera@3x.png in Resources */,
+				CE2732E61DD316C1005A443D /* shui_ke_yi_kan.png in Resources */,
 				11D7590E1BBACC2700F554D7 /* AlbumLike@3x.png in Resources */,
+				CE2732EA1DD316D6005A443D /* ti_xing_shui_kan.png in Resources */,
 				11D7590F1BBACC2700F554D7 /* AlbumOperateMoreViewBkg@2x.png in Resources */,
 				11D758F31BB8EA5E00F554D7 /* LikeCmtBg@3x.png in Resources */,
 				11D758F21BB8EA5E00F554D7 /* LikeCmtBg@2x.png in Resources */,
 				11D758EC1BB8E6C300F554D7 /* AlbumOperateMoreHL@2x.png in Resources */,
 				11D758EB1BB8E6C300F554D7 /* AlbumOperateMore@3x.png in Resources */,
+				CE2732E41DD316BB005A443D /* location.png in Resources */,
+				CE2732E81DD316CA005A443D /* suo_lve_tu.png in Resources */,
 				1173E5251C71BF63004C9979 /* AlbumAddBtn@2x.png in Resources */,
 				1173E4F31C71813E004C9979 /* Camera@2x.png in Resources */,
 				11D7590D1BBACC2700F554D7 /* AlbumLike@2x.png in Resources */,
+				CE2732E21DD316B5005A443D /* lei_xing.png in Resources */,
 				11D758EF1BB8E6C300F554D7 /* Like@3x.png in Resources */,
 				11D758ED1BB8E6C300F554D7 /* AlbumOperateMoreHL@3x.png in Resources */,
 				11D7590C1BBACC2700F554D7 /* AlbumComment@3x.png in Resources */,

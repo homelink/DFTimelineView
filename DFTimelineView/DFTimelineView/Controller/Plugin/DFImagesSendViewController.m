@@ -14,6 +14,7 @@
 #import "MMPopupItem.h"
 #import "MMSheetView.h"
 #import "MMPopupWindow.h"
+#import "Masonry.h"
 
 #import "TZImagePickerController.h"
 
@@ -21,7 +22,7 @@
 
 #define ImageGridWidth [UIScreen mainScreen].bounds.size.width*0.7
 
-@interface DFImagesSendViewController()<DFPlainGridImageViewDelegate,TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate>
+@interface DFImagesSendViewController()<DFPlainGridImageViewDelegate,TZImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *images;
 
@@ -32,6 +33,8 @@
 @property (nonatomic, strong) UILabel *placeholder;
 
 @property (nonatomic, strong) DFPlainGridImageView *gridView;
+
+@property (nonatomic, strong) UITableView *tabView;
 
 @property (nonatomic, strong) UIImagePickerController *pickerController;
 
@@ -67,11 +70,19 @@
 {
     [super viewDidLoad];
     [self initView];
-    
 }
 
 -(void) initView
 {
+    
+    //导航栏颜色
+    UIColor * color = [UIColor whiteColor];
+    NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+    self.navigationController.navigationBar.titleTextAttributes = dict;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:40/256.0 green:40/256.0 blue:40/256.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -100,6 +111,20 @@
     _gridView = [[DFPlainGridImageView alloc] initWithFrame:CGRectZero];
     _gridView.delegate = self;
     [self.view addSubview:_gridView];
+    
+    _tabView = [[UITableView alloc]init];
+    _tabView.delegate = self;
+    _tabView.dataSource = self;
+    _tabView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    [self.view addSubview:_tabView];
+    _tabView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    [self.view addSubview:_tabView];
+    [_tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_gridView.mas_bottom).offset(0);
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-10);
+        
+    }];
     
     
     _mask = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -142,7 +167,17 @@
 
 -(void) cancel
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"确定退出此次编辑？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 -(void) send
@@ -164,6 +199,15 @@
     [_contentView resignFirstResponder];
 }
 
+-(IBAction)sliderChanged:(UISlider*)sender {
+    
+    NSLog(@"sender.value = %f",sender.value);
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:2];
+    UITableViewCell *cell = [_tabView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"图片压缩率%d%%",(int)sender.value];
+}
+
+
 
 
 #pragma mark - UITextViewDelegate
@@ -178,15 +222,15 @@
         _placeholder.hidden = NO;
         
     }
-//    if ([text isEqualToString:@"\n"]){
-//        _mask.hidden = YES;
-//        [_contentView resignFirstResponder];
-//        if (range.location == 0)
-//        {
-//            _placeholder.hidden = NO;
-//        }
-//        return NO;
-//    }
+    //    if ([text isEqualToString:@"\n"]){
+    //        _mask.hidden = YES;
+    //        [_contentView resignFirstResponder];
+    //        if (range.location == 0)
+    //        {
+    //            _placeholder.hidden = NO;
+    //        }
+    //        return NO;
+    //    }
     
     return YES;
 }
@@ -330,6 +374,78 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [_pickerController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma  mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 4;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0 || section == 2) {
+        return 1;
+    }
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 15;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    if (indexPath.section == 0) {
+        cell.imageView.image = [UIImage imageNamed:@"location"];
+        cell.textLabel.text = @"所在位置";
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.imageView.image = [UIImage imageNamed:@"shui_ke_yi_kan"];
+            cell.textLabel.text = @"谁可以看";
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"ti_xing_shui_kan"];
+            cell.textLabel.text = @"提醒谁看";
+        }
+    } else if (indexPath.section == 2) {
+        cell.imageView.image = [UIImage imageNamed:@"suo_lve_tu"];
+        cell.textLabel.text = @"图片压缩率";
+        UISlider *mySlider = [[UISlider alloc] init];
+        [self.view addSubview:mySlider];
+        mySlider.minimumValue = 0.0;
+        mySlider.maximumValue = 50.0;
+        mySlider.value = 0.0;
+        mySlider.continuous = YES;
+        [mySlider addTarget:self action:@selector(sliderChanged:)
+           forControlEvents:UIControlEventValueChanged];
+        [cell.contentView addSubview:mySlider];
+        [mySlider mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cell.textLabel.mas_right).offset(5);
+            make.right.mas_equalTo(-5);
+            make.top.mas_equalTo(10);
+            make.height.mas_equalTo(20);
+        }];
+    } else {
+        if (indexPath.row == 0) {
+            cell.imageView.image = [UIImage imageNamed:@"fen_zu"];
+            cell.textLabel.text = @"分组";
+        } else{
+            cell.imageView.image = [UIImage imageNamed:@"lei_xing"];
+            cell.textLabel.text = @"基层类型";
+        }
+    }
+    
+    cell.accessoryType = YES;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 3) {
+        if (indexPath.row == 0) {
+            NSLog(@"测试动态分组");
+        }
+    }
 }
 
 @end
