@@ -37,7 +37,7 @@
 
 @property (assign, nonatomic) long long currentItemId;
 
-@property (nonatomic, strong) UIImagePickerController *pickerController;
+
 
 @end
 

@@ -16,6 +16,7 @@
 @interface DFTimeLineViewController : DFBaseTimeLineViewController
 
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) UIImagePickerController *pickerController;
 
 //添加到末尾
 -(void) addItem:(DFBaseLineItem *) item;
