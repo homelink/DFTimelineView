@@ -72,6 +72,9 @@
         
         [_textContentLabel setDidClickLinkBlock:^(MLLink *link, NSString *linkText, MLLinkLabel *label) {
             NSString *tips = [NSString stringWithFormat:@"Click\nlinkType:%ld\nlinkText:%@\nlinkValue:%@",(unsigned long)link.linkType,linkText,link.linkValue];
+            if ([self.delegate respondsToSelector:@selector(sendClickItemMsg:itemText:)]) {
+                [self.delegate sendClickItemMsg:link.linkType itemText:linkText];
+            }
             NSLog(@"%@", tips);
         }];
 

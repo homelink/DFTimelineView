@@ -34,6 +34,7 @@
 
 -(void) onClickComment:(long long) commentId itemId:(long long) itemId;
 
+-(void) sendClickItemMsg:(NSUInteger *)type itemText:(NSString *)text;
 
 @end
 
