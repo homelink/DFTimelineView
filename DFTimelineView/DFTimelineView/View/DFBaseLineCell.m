@@ -105,7 +105,6 @@
         width = UserAvatarSize;
         height = width;
         _userAvatarView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-        _userAvatarView.backgroundColor = [UIColor lightGrayColor];
         [self.contentView addSubview:_userAvatarView];
         
         _userAvatarButton = [[UIButton alloc] initWithFrame:_userAvatarView.frame];
