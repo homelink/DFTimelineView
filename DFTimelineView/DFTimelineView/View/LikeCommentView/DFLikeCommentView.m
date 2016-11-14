@@ -300,10 +300,15 @@
     
     [lable setDidClickLinkBlock:^(MLLink *link, NSString *linkText, MLLinkLabel *label) {
         
-        if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUser:)]) {
-            
-            NSUInteger userId = [link.linkValue integerValue];
-            [likeCommentView.delegate onClickUser:userId];
+        if (link.linkType == 1){
+            NSLog(@"点击了网址");
+        } else {
+            NSLog(@"走下面");
+            if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUser:)]) {
+                
+                NSUInteger userId = [link.linkValue integerValue];
+                [likeCommentView.delegate onClickUser:userId];
+            }
         }
     }];
     
