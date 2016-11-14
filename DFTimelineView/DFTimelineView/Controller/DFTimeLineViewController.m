@@ -171,8 +171,7 @@
         }
     };
     
-    NSArray *items = @[MMItemMake(@"小视频", MMItemTypeNormal, block),
-                       MMItemMake(@"拍照", MMItemTypeNormal, block),
+    NSArray *items = @[MMItemMake(@"拍照", MMItemTypeNormal, block),
                        MMItemMake(@"从相册选取", MMItemTypeNormal, block)];
     
     MMSheetView *sheetView = [[MMSheetView alloc] initWithTitle:@"" items:items];
