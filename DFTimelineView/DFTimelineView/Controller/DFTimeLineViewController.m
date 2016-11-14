@@ -158,14 +158,14 @@
     MMPopupItemHandler block = ^(NSInteger index){
         switch (index) {
             case 0:
-                [self captureViedo];
-                break;
-            case 1:
                 [self takePhoto];
                 break;
-            case 2:
+            case 1:
                 [self pickFromAlbum];
                 break;
+//            case 2:
+//                [self pickFromAlbum];
+//                break;
             default:
                 break;
         }
