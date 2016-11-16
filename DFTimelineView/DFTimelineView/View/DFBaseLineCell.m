@@ -432,4 +432,15 @@
         [_delegate onClickComment:commentId itemId:self.item.itemId];
     }
 }
+
+-(void)onClickUrl:(NSString *)url {
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUrl:)]) {
+        [_delegate onClickUrl:url];
+    }
+}
+-(void)onClickPhoneNum:(NSString *)phone{
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickPhoneNum:)]) {
+        [_delegate onClickPhoneNum:phone];
+    }
+}
 @end

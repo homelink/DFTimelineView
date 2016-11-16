@@ -301,9 +301,17 @@
     [lable setDidClickLinkBlock:^(MLLink *link, NSString *linkText, MLLinkLabel *label) {
         
         if (link.linkType == 1){
-            NSLog(@"点击了网址");
+            if ([_delegate respondsToSelector:@selector(onClickUrl:)]) {
+                [_delegate onClickUrl:linkText];
+                NSLog(@"网址");
+            }
+        }  else if (link.linkType == 2) {
+            if ([_delegate respondsToSelector:@selector(onClickPhoneNum:)]) {
+                [likeCommentView.delegate onClickPhoneNum:linkText];
+                NSLog(@"电话");
+            }
+            
         } else {
-            NSLog(@"走下面");
             if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUser:)]) {
                 
                 NSUInteger userId = [link.linkValue integerValue];

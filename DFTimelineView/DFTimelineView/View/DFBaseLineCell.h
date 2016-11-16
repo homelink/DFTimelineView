@@ -36,6 +36,10 @@
 
 -(void) sendClickItemMsg:(NSUInteger *)type itemText:(NSString *)text;
 
+-(void) onClickUrl:(NSString *)url;
+
+-(void) onClickPhoneNum:(NSString *)phone;
+
 @end
 
 @interface DFBaseLineCell : UITableViewCell
