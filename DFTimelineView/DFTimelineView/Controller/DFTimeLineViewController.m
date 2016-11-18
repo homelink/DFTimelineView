@@ -311,7 +311,8 @@
 -(void)addLikeItem:(DFLineLikeItem *)likeItem itemId:(long long)itemId
 {
     DFBaseLineItem *item = [self getItem:itemId];
-    [item.likes insertObject:likeItem atIndex:0];
+//    [item.likes insertObject:likeItem atIndex:0];
+    [item.likes addObject:item];
     
     item.likesStr = nil;
     item.cellHeight = 0;

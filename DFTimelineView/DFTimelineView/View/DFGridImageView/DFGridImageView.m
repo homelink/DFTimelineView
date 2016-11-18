@@ -69,8 +69,11 @@
     
     _oneImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     _oneImageView.hidden = YES;
-    _oneImageView.backgroundColor = [UIColor lightGrayColor];
-    
+//    _oneImageView.backgroundColor = [UIColor lightGrayColor];
+    [_oneImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
+    _oneImageView.contentMode =  UIViewContentModeScaleAspectFill;
+    _oneImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    _oneImageView.clipsToBounds  = YES;
     
     _oneImageButton = [[UIButton alloc] initWithFrame:CGRectZero];
     _oneImageButton.hidden = YES;
