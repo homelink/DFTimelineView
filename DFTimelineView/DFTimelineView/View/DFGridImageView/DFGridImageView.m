@@ -71,7 +71,7 @@
     _oneImageView.hidden = YES;
 //    _oneImageView.backgroundColor = [UIColor lightGrayColor];
     [_oneImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
-    _oneImageView.contentMode =  UIViewContentModeScaleAspectFill;
+    _oneImageView.contentMode =  UIViewContentModeLeft;
     _oneImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     _oneImageView.clipsToBounds  = YES;
     
