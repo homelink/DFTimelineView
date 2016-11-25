@@ -158,21 +158,20 @@
     MMPopupItemHandler block = ^(NSInteger index){
         switch (index) {
             case 0:
-                [self captureViedo];
-                break;
-            case 1:
                 [self takePhoto];
                 break;
-            case 2:
+            case 1:
                 [self pickFromAlbum];
                 break;
+//            case 2:
+//                [self pickFromAlbum];
+//                break;
             default:
                 break;
         }
     };
     
-    NSArray *items = @[MMItemMake(@"小视频", MMItemTypeNormal, block),
-                       MMItemMake(@"拍照", MMItemTypeNormal, block),
+    NSArray *items = @[MMItemMake(@"拍照", MMItemTypeNormal, block),
                        MMItemMake(@"从相册选取", MMItemTypeNormal, block)];
     
     MMSheetView *sheetView = [[MMSheetView alloc] initWithTitle:@"" items:items];

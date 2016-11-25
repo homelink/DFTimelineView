@@ -300,10 +300,23 @@
     
     [lable setDidClickLinkBlock:^(MLLink *link, NSString *linkText, MLLinkLabel *label) {
         
-        if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUser:)]) {
+        if (link.linkType == 1){
+            if ([_delegate respondsToSelector:@selector(onClickUrl:)]) {
+                [_delegate onClickUrl:linkText];
+                NSLog(@"网址");
+            }
+        }  else if (link.linkType == 2) {
+            if ([_delegate respondsToSelector:@selector(onClickPhoneNum:)]) {
+                [likeCommentView.delegate onClickPhoneNum:linkText];
+                NSLog(@"电话");
+            }
             
-            NSUInteger userId = [link.linkValue integerValue];
-            [likeCommentView.delegate onClickUser:userId];
+        } else {
+            if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUser:)]) {
+                
+                NSUInteger userId = [link.linkValue integerValue];
+                [likeCommentView.delegate onClickUser:userId];
+            }
         }
     }];
     

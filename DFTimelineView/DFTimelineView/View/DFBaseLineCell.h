@@ -34,6 +34,11 @@
 
 -(void) onClickComment:(long long) commentId itemId:(long long) itemId;
 
+-(void) sendClickItemMsg:(NSUInteger *)type itemText:(NSString *)text;
+
+-(void) onClickUrl:(NSString *)url;
+
+-(void) onClickPhoneNum:(NSString *)phone;
 
 @end
 

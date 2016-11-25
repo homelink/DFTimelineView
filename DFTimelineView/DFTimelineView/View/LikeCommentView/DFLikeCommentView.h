@@ -13,7 +13,8 @@
 @required
 -(void) onClickUser:(NSUInteger) userId;
 -(void) onClickComment:(long long) commentId;
-
+-(void) onClickPhoneNum:(NSString *)phone;
+-(void) onClickUrl:(NSString *)url;
 @end
 
 

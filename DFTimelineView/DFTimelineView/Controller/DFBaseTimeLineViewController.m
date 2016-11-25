@@ -115,9 +115,7 @@
     height = width;
     
     UIButton *avatarBg = [[UIButton alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    avatarBg.backgroundColor = [UIColor whiteColor];
-    avatarBg.layer.borderWidth=0.5;
-    avatarBg.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
     [avatarBg addTarget:self action:@selector(onClickUserAvatar:) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:avatarBg];
     

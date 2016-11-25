@@ -105,7 +105,6 @@
         width = UserAvatarSize;
         height = width;
         _userAvatarView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-        _userAvatarView.backgroundColor = [UIColor lightGrayColor];
         [self.contentView addSubview:_userAvatarView];
         
         _userAvatarButton = [[UIButton alloc] initWithFrame:_userAvatarView.frame];
@@ -431,6 +430,17 @@
 {
     if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickComment:itemId:)]) {
         [_delegate onClickComment:commentId itemId:self.item.itemId];
+    }
+}
+
+-(void)onClickUrl:(NSString *)url {
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickUrl:)]) {
+        [_delegate onClickUrl:url];
+    }
+}
+-(void)onClickPhoneNum:(NSString *)phone{
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(onClickPhoneNum:)]) {
+        [_delegate onClickPhoneNum:phone];
     }
 }
 @end
