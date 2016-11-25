@@ -358,6 +358,7 @@
 
 
 //发送视频 目前没有实现填写文字
+#pragma mark - DFVideoCaptureControllerDelegate
 -(void)onSendVideo:(NSString *)text videoPath:(NSString *)videoPath screenShot:(UIImage *)screenShot
 {
     DFVideoLineItem *videoItem = [[DFVideoLineItem alloc] init];
