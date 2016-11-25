@@ -39,9 +39,9 @@ PODS:
   - MMPopupView (1.7.2):
     - Masonry
   - ODRefreshControl (1.2)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - SVProgressHUD (2.0.3)
   - TZImagePickerController (1.5.0)
   - YLGIFImage (0.11)
